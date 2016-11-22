@@ -1,6 +1,7 @@
 import os
 import schedule
 import time
+from random import choice
 from twilio.rest import TwilioRestClient
 from models import *
 from server import app
@@ -50,8 +51,28 @@ def calculate_user_success():
     db.session.commit()
 
 
+def create_sms():
+    users = User.query.filter(User.reminders.isnot(None)).all()
+    for user in users:
+        if user.reminders == 'weekly' and not user._is_sunday():
+            # only send weekly reminders on sundays
+            continue
+        if not user.habits:
+            msg_body = 'Hey there! Remember to track your habits'
+        else:
+            habit = choice(user.habits).title
+            msg_body = 'Have you completed {} today? Mark it'.format(habit)
+        msg_body += ' in Level Up and see your progress!'
+
+        try:
+            client.messages.create(body=msg_body, to=user.sms_num, from_=tnum)
+        except TwilioRestException as e:
+            print e
+
+
 schedule.every().hour.do(calculate_success)
 schedule.every().hour.do(calculate_user_success)
+schedule.every().day.at('18:00').do(create_sms)
 
 
 while True:

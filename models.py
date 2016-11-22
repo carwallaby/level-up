@@ -141,6 +141,15 @@ class Habit(db.Model):
             return [c for c in self.completions if
                     c.get_local_timestamp().date() > week_ago]
 
+    def _get_relevant_weekday(self):
+        """Gets day of the week as integer to use for success calculations.
+        Sunday is 1, Saturday is 7."""
+        weekday = self.user.current_arrow().weekday() + 2
+        if weekday > 7:
+            # this will make sunday 1 instead of 8
+            weekday = weekday - 7
+        return weekday
+
     def calculate_latest_success(self):
         """Calculates user's success over 1 timeframe iteration."""
         if not self.timeframe:

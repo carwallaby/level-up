@@ -23,7 +23,7 @@ def calculate_success():
             # only calculate success if it's between midnight & 1
             continue
 
-        latest = habit.calculate_latest_success()
+        latest = habit._calculate_latest_success()
         total = habit.total_success or 0
 
         if habit.user._is_sunday() and habit.timeframe == 'week':

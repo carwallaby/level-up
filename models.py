@@ -153,6 +153,7 @@ class Habit(db.Model):
     def _calculate_midweek_metrics(self, latest):
         """Calculates current week's rating; sets up for new week if Sunday."""
         weekday = self._get_relevant_weekday()
+        # days already counted will be one less than yesterday
         days_counted = weekday - 2
         if days_counted <= 0:
             # there can be 1-6 days already counted
@@ -171,10 +172,10 @@ class Habit(db.Model):
         else:
             self.current_week_success = current_week_success
 
-    def calculate_latest_success(self):
+    def _calculate_latest_success(self):
         """Calculates user's success over 1 timeframe iteration."""
         if not self.timeframe:
-            # user doesn't have any success goals
+            # user doesn't have any success goals. shouldn't be called.
             return None
 
         comps = self._get_relevant_completions()

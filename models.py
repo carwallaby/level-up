@@ -26,6 +26,9 @@ class User(db.Model):
     email = db.Column(db.String(200), nullable=True)
     reminders = db.Column(db.Enum('daily', 'weekly', name='reminder'),
                           nullable=True)
+    # ---------- success metrics ----------
+    last_week_success = db.Column(db.Float, nullable=True)
+    total_success = db.Column(db.Float, nullable=True)
 
     def __repr__(self):
         """Representation of a user."""
@@ -64,6 +67,12 @@ class User(db.Model):
         """Returns whether it is Sunday in user's timezone.
         Used for success calculations."""
         return self.current_arrow().weekday() == 6
+
+    # ---------- success ----------
+
+    def get_success_counted_habits(self):
+        """Gets user's habits that count for success metrics."""
+        return [h for h in self.habits if h.timeframe]
 
     # ---------- login manager ----------
 

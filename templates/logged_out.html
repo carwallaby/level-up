@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block body %}
+<h1>Level Up!</h1>
+<h5>Track your habits. See your progress. Get motivated.</h5>
+<div id="flash-container">
+    {% with messages = get_flashed_messages(with_categories=True) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                <div class="flash {{ category }}">{{ message }}</div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+</div>
+<div ui-view></div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/login-reg.js') }}"></script>
+{% endblock %}

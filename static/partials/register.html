@@ -1,0 +1,16 @@
+<form action="/auth/process-registration" method="POST" novalidate>
+    <label for="email">Email</label>
+    <input type="email" name="email" id="email" ng-model="email" required>
+    <label for="password">Password</label>
+    <input type="password" name="password" id="password" ng-model="password" ng-minlength="6" required>
+    <label for="location">Location</label>
+    <input type="text" name="location" id="location" ng-model="location" placeholder="San Francisco, CA" ng-readonly="validatedLocation" required>
+    <button type="button" ng-hide="validatedLocation" ng-disabled="searching || !location" ng-click="findLocations(location)">Find Me!</button>
+    <button type="button" ng-show="validatedLocation" ng-click="clearLocations()">Clear Location</button>
+    <div ng-show="locationResults.length">
+        <a ng-repeat="result in locationResults" ng-class="{error: !result.timezone}" ng-click="selectLocation(result)">{{ result.name }}</a>
+    </div>
+    <input type="text" name="timezone" ng-model="timezone" readonly required hidden>
+    <input type="submit" value="Sign Up" ng-disabled="!email || !password || !validatedLocation">
+</form>
+<a ui-sref="login">Log In</a>

@@ -14,7 +14,7 @@ class User(db.Model):
     __tablename__ = 'users'
 
     user_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    username = db.Column(db.String(50), unique=True, nullable=False)
+    email = db.Column(db.String(200), unique=True, nullable=False)
     password = db.Column(db.String(200), nullable=False)
     location = db.Column(db.String(200), nullable=False)
     timezone = db.Column(db.String(100), nullable=False)
@@ -23,7 +23,6 @@ class User(db.Model):
     name = db.Column(db.String(100), nullable=True)
     birthdate = db.Column(db.Date, nullable=True)
     sms_num = db.Column(db.String(20), nullable=True)
-    email = db.Column(db.String(200), nullable=True)
     reminders = db.Column(db.Enum('daily', 'weekly', name='reminder'),
                           nullable=True)
     # ---------- success metrics ----------
@@ -31,7 +30,7 @@ class User(db.Model):
 
     def __repr__(self):
         """Representation of a user."""
-        return '<User {} {}>'.format(self.user_id, self.username)
+        return '<User {} {}>'.format(self.user_id, self.email)
 
     # ---------- password verification ----------
 
@@ -109,13 +108,12 @@ class User(db.Model):
 
         data = {
             'user_id': self.user_id,
-            'username': self.username,
+            'email': self.email,
             'location': self.location,
             'local_signup': local_signup.isoformat(),
             'name': self.name,
             'birthdate': birthdate,
             'sms_num': self.sms_num,
-            'email': self.email,
             'reminders': self.reminders,
             'is_birthday': self.is_birthday(),
             'local_now': now.isoformat(),

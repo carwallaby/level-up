@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block body %}
+<header>
+    <a ui-sref="home">Level Up!</a>
+    <a ui-sref="new-habit">Add Habit</a>
+    <a ui-sref="account">Account</a>
+    <a href="/logout" target="_self">Log Out</a>
+</header>
+<div id="flash-container">
+    {% with messages = get_flashed_messages(with_categories=True) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                <div class="flash {{ category }}">{{ message }}</div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+</div>
+<div ui-view></div>
+{% endblock %}
+
+{% block scripts %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.3.0/Chart.min.js"></script>
+{% endblock %}

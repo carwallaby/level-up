@@ -1,0 +1,26 @@
+'use strict';
+
+var lvlup = angular.module('LevelUp', ['ui.router']);
+
+lvlup
+.config(function($stateProvider, $locationProvider) {
+    $locationProvider.html5Mode({
+        enabled: true,
+        requireBase: false
+    });
+
+    $stateProvider.state('register', {
+        url: '/register',
+        templateUrl: 'static/partials/register.html',
+        controller: 'LoginRegController'
+    })
+    .state('login', {
+        url: '/login',
+        templateUrl: 'static/partials/login.html',
+        controller: 'LoginRegController'
+    })
+    .state('home', {
+        url: '/home',
+        templateUrl: 'static/partials/home.html'
+    });
+});

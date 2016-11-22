@@ -42,7 +42,7 @@ def bundle_location_data(location):
 
     for possible_location in location_res:
         try:
-            data = _bundle_single_location(location)
+            data = _bundle_single_location(possible_location)
         except FailedTimezoneRequestError as e:
             print e.message
             continue

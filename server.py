@@ -1,5 +1,4 @@
 """Backend routes and Flask config."""
-import arrow
 import os
 from flask import Flask
 from flask import flash, jsonify, redirect, render_template, request
@@ -86,6 +85,25 @@ def process_registration():
     db.session.commit()
     login_user(user)
     flash('Welcome!', 'success')
+    return redirect('/home')
+
+
+@app.route('/auth/validate-login', methods=['POST'])
+def validate_login():
+    email = request.form.get('email')
+    password = request.form.get('password')
+    remember = bool(request.form.get('remember'))
+    user = User.query.filter_by(email=email).first()
+
+    if not user:
+        flash('No user with that email address found.', 'error')
+        return redirect('/login')
+    elif not user.verify_password(password):
+        flash('Incorrect password.', 'error')
+        return redirect('/login')
+
+    login_user(user, remember=remember)
+    flash('Welcome back!', 'success')
     return redirect('/home')
 
 

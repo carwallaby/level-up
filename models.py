@@ -28,7 +28,6 @@ class User(db.Model):
                           nullable=True)
     # ---------- success metrics ----------
     last_week_success = db.Column(db.Float, nullable=True)
-    total_success = db.Column(db.Float, nullable=True)
 
     def __repr__(self):
         """Representation of a user."""
@@ -70,9 +69,20 @@ class User(db.Model):
 
     # ---------- success ----------
 
-    def get_success_counted_habits(self):
+    def _get_success_counted_habits(self):
         """Gets user's habits that count for success metrics."""
         return [h for h in self.habits if h.timeframe]
+
+    def _calculate_past_week_success(self):
+        """Calculates user's success over most recent week.
+        Run as part of a weekly job."""
+        counted_habits = self._get_success_counted_habits()
+        if not counted_habits:
+            # user doesn't have any habits to count
+            return None
+        successes = [h.last_week_success for h in counted_habits]
+        total_success = sum(successes)
+        return float(total_success) / len(successes)
 
     # ---------- login manager ----------
 
@@ -121,7 +131,7 @@ class Habit(db.Model):
         """Gets creation timestamp in user's timezone."""
         return self.user.convert_utc_to_local(self.created)
 
-    def get_days_since_creation(self):
+    def _get_days_since_creation(self):
         """Gets number of days since habit was created."""
         creation_date = self.get_local_creation_timestamp().date()
         today = self.user.current_arrow().date()

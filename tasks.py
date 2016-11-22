@@ -30,7 +30,7 @@ def calculate_success():
             # time to calculate last week's success for weekly habit
             habit.last_week_success = latest
             # denominator will be total # of weeks habit has existed
-            denominator = ceil(habit.get_days_since_creation() / 7.0)
+            denominator = ceil(habit._get_days_since_creation() / 7.0)
 
         elif habit.timeframe == 'week':
             # only need to calculate past week success on sundays
@@ -38,7 +38,7 @@ def calculate_success():
 
         else:
             # denominator will be the number of days counting yesterday
-            denominator = (habit.get_days_since_creation() - 1) or 1
+            denominator = (habit._get_days_since_creation() - 1) or 1
             habit._calculate_midweek_metrics(latest)
 
         habit.total_success = (latest + total) / float(denominator)
@@ -46,7 +46,20 @@ def calculate_success():
     db.session.commit()
 
 
+def calculate_user_success():
+    """Calculates user's total success for the past week.
+    Calculated on Sundays at midnight in user's timezone."""
+    users = User.query.all()
+    for user in users:
+        if not user._is_midnight() or not user._is_sunday():
+            # only count on sundays at midnight
+            continue
+        user.last_week_success = user._calculate_past_week_success()
+    db.session.commit()
+
+
 schedule.every().hour.do(calculate_success)
+schedule.every().hour.do(calculate_user_success)
 
 
 while True:

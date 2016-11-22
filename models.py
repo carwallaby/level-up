@@ -99,6 +99,31 @@ class User(db.Model):
         """Returns user ID as unicode."""
         return unichr(self.user_id)
 
+    # ---------- dictionarify ----------
+
+    def dictionarify(self):
+        """Returns user info as JSONifiable dictionary."""
+        local_signup = self.convert_utc_to_local(self.signed_up)
+        now = self.current_arrow()
+        birthdate = self.birthdate.isoformat() if self.birthdate else None
+
+        data = {
+            'user_id': self.user_id,
+            'username': self.username,
+            'location': self.location,
+            'local_signup': local_signup.isoformat(),
+            'name': self.name,
+            'birthdate': birthdate,
+            'sms_num': self.sms_num,
+            'email': self.email,
+            'reminders': self.reminders,
+            'is_birthday': self.is_birthday(),
+            'local_now': now.isoformat(),
+            'last_week_success': self.last_week_success
+        }
+
+        return data
+
 
 class Habit(db.Model):
     """A habit."""
@@ -117,7 +142,6 @@ class Habit(db.Model):
     # ---------- success metrics ----------
     current_week_success = db.Column(db.Float, nullable=True)
     last_week_success = db.Column(db.Float, nullable=True)
-    total_success = db.Column(db.Float, nullable=True)
 
     user = db.relationship('User', backref=db.backref('habits'))
 
@@ -130,12 +154,6 @@ class Habit(db.Model):
     def get_local_creation_timestamp(self):
         """Gets creation timestamp in user's timezone."""
         return self.user.convert_utc_to_local(self.created)
-
-    def _get_days_since_creation(self):
-        """Gets number of days since habit was created."""
-        creation_date = self.get_local_creation_timestamp().date()
-        today = self.user.current_arrow().date()
-        return (today - creation_date).days
 
     # ---------- success ----------
 
@@ -160,7 +178,7 @@ class Habit(db.Model):
             weekday = weekday - 7
         return weekday
 
-    def _calculate_midweek_metrics(self, latest):
+    def _set_midweek_metrics(self, latest):
         """Calculates current week's rating; sets up for new week if Sunday."""
         weekday = self._get_relevant_weekday()
         # days already counted will be one less than yesterday
@@ -203,6 +221,22 @@ class Habit(db.Model):
             # gets percentage completed
             return len(comps) / float(self.min_goal)
 
+    # ---------- dictionarify ----------
+
+    def dictionarify(self):
+        """Returns habit info as JSONifiable dictionary."""
+        data = {
+            'habit_id': self.habit_id,
+            'title': self.title,
+            'created': self.get_local_creation_timestamp().isoformat(),
+            'min_goal': self.min_goal,
+            'max_goal': self.max_goal,
+            'timeframe': self.timeframe,
+            'last_week_success': self.last_week_success
+        }
+
+        return data
+
 
 class Completion(db.Model):
     """A completion of a habit by a user."""
@@ -225,6 +259,18 @@ class Completion(db.Model):
     def get_local_timestamp(self):
         """Gets timestamp in user's timezone."""
         return self.habit.user.convert_utc_to_local(self.timestamp)
+
+    # ---------- dictionarify ----------
+
+    def dictionarify(self):
+        """Returns completion info as JSONifiable dictionary."""
+        data = {
+            'completion_id': self.completion_id,
+            'habit_id': self.habit_id,
+            'timestamp': self.get_local_timestamp().isoformat()
+        }
+
+        return data
 
 
 # -------------------- helpers --------------------

@@ -1,7 +1,6 @@
 import os
 import schedule
 import time
-from math import ceil
 from twilio.rest import TwilioRestClient
 from models import *
 from server import app
@@ -24,24 +23,17 @@ def calculate_success():
             continue
 
         latest = habit._calculate_latest_success()
-        total = habit.total_success or 0
 
         if habit.user._is_sunday() and habit.timeframe == 'week':
             # time to calculate last week's success for weekly habit
             habit.last_week_success = latest
-            # denominator will be total # of weeks habit has existed
-            denominator = ceil(habit._get_days_since_creation() / 7.0)
 
         elif habit.timeframe == 'week':
             # only need to calculate past week success on sundays
             continue
 
         else:
-            # denominator will be the number of days counting yesterday
-            denominator = (habit._get_days_since_creation() - 1) or 1
-            habit._calculate_midweek_metrics(latest)
-
-        habit.total_success = (latest + total) / float(denominator)
+            habit._set_midweek_metrics(latest)
 
     db.session.commit()
 

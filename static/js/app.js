@@ -23,4 +23,15 @@ lvlup
         url: '/home',
         templateUrl: 'static/partials/home.html'
     });
+})
+
+.run(function($rootScope, $state, $timeout) {
+    $rootScope.$on('$stateChangeSuccess', function() {
+        var flashContainer = document.getElementById('flash-container');
+        $timeout(function() {
+            while (flashContainer.firstChild) {
+                flashContainer.removeChild(flashContainer.firstChild);
+            }
+        }, 2500);
+    });
 });

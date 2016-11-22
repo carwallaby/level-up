@@ -150,6 +150,27 @@ class Habit(db.Model):
             weekday = weekday - 7
         return weekday
 
+    def _calculate_midweek_metrics(self, latest):
+        """Calculates current week's rating; sets up for new week if Sunday."""
+        weekday = self._get_relevant_weekday()
+        days_counted = weekday - 2
+        if days_counted <= 0:
+            # there can be 1-6 days already counted
+            days_counted = 6 + days_counted
+
+        week_so_far = self.current_week_success or 0
+        total_week_success = week_so_far * days_counted
+        total_week_success += latest
+        current_week_success = total_week_success / (days_counted + 1)
+
+        if weekday == 1:
+            # it's sunday, so set up for the new week
+            self.last_week_success = current_week_success
+            self.current_week_success = 0
+
+        else:
+            self.current_week_success = current_week_success
+
     def calculate_latest_success(self):
         """Calculates user's success over 1 timeframe iteration."""
         if not self.timeframe:

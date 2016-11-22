@@ -13,33 +13,6 @@ twilio_client = TwilioRestClient(tsid, tauth)
 connect_to_db(app)
 
 
-def _get_already_counted_weekdays(current_weekday):
-    """Gets number of weekdays already counted in current week."""
-    # recording yesterday's now, so already counted rest of week
-    counted = current_weekday - 2
-    if counted <= 0:
-        # there can be 1-6 days already counted
-        counted = 6 + counted
-    return counted
-
-
-def _calculate_weekly_metrics_for_daily_habit(habit, latest):
-    """Calculates current week's rating; sets up for new week if Sunday."""
-    weekday = habit._get_relevant_weekday()
-    days_counted = _get_already_counted_weekdays(weekday)
-    total_week_success = habit.current_week_success * days_counted
-    total_week_success += latest
-    current_week_success = total_week_success / (days_counted + 1)
-
-    if weekday == 1:
-        # it's sunday, so set up for the new week
-        habit.last_week_success = current_week_success
-        habit.current_week_success = 0
-
-    else:
-        habit.current_week_success = current_week_success
-
-
 def calculate_success():
     """Calculates most recent success for habits.
     Calculated at midnight for habit's user's timezone."""
@@ -66,7 +39,7 @@ def calculate_success():
         else:
             # denominator will be the number of days counting yesterday
             denominator = (habit.get_days_since_creation() - 1) or 1
-            _calculate_weekly_metrics_for_daily_habit(habit, latest)
+            habit._calculate_midweek_metrics(latest)
 
         habit.total_success = (latest + total) / float(denominator)
 

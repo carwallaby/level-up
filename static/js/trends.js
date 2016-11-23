@@ -1,7 +1,7 @@
 'use strict';
 
 lvlup
-.directive('lineChart', function(TrendFactory) {
+.directive('lvlLineChart', function(TrendFactory) {
     function fillInMissingDates(dates, frequenciesByDate) {
         var points = [];
 

@@ -2,9 +2,9 @@
 
 lvlup
 .factory('TrendFactory', function() {
-    var momentFactory = {};
+    var trendFactory = {};
 
-    momentFactory.tallyCompletionsByDate = function(completions) {
+    trendFactory.tallyCompletionsByDate = function(completions) {
         var frequencies = {};
 
         for (var i = 0; i < completions.length; i++) {
@@ -21,7 +21,7 @@ lvlup
         return frequencies;
     };
 
-    momentFactory.getPastDates = function(numDays) {
+    trendFactory.getPastDates = function(numDays) {
         var dates = [];
 
         for (var i = 0; i < numDays; i++) {
@@ -31,7 +31,7 @@ lvlup
         return dates;
     };
 
-    momentFactory.massFormatMoments = function(momentArray, formatString) {
+    trendFactory.massFormatMoments = function(momentArray, formatString) {
         var formatted = [];
 
         for (var i = 0; i < momentArray.length; i++) {
@@ -41,5 +41,19 @@ lvlup
         return formatted;
     };
 
-    return momentFactory;
+    trendFactory.getDatesByMonthAndYear = function(monthString, year) {
+        var completeMonth = [];
+
+        for (var i = 0; i <= 31; i++) {
+            var nextDay = moment().year(year).month(monthString).date(1 + i);
+            if (nextDay.month() !== moment().month(monthString).month()) {
+                break;
+            }
+            completeMonth.push(nextDay);
+        }
+
+        return completeMonth;
+    };
+
+    return trendFactory;
 });

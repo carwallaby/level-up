@@ -1,0 +1,10 @@
+<a ng-click="changeMonth(-1)">Previous</a>
+<a ng-click="onCurrentMonth ? null : changeMonth(1)">Next</a>
+<a ng-click="onCurrentMonth ? null : loadCurrentMonth()">Today</a>
+<p>{{ monthString }} {{ currentYear }}</p>
+<div>
+    <div ng-repeat="date in dates" ng-class="{today: isToday(date)}">
+        <span>{{ date.format('DD') }}</span>
+        <span>Completions: {{ frequencies[date.format('MMM D YYYY')] }}</span>
+    </div>
+</div>

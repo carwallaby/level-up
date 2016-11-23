@@ -52,6 +52,7 @@ body {
 
 .label-input-group input {
     display: block;
+    width: 100%;
 }
 
 .text-input {
@@ -60,7 +61,6 @@ body {
     border-bottom: 2px solid #bdbdbd;
     line-height: 1.5;
     padding: 5px;
-    width: 100%;
 }
 
 .text-input.ng-dirty.ng-invalid:not(:focus) {
@@ -74,4 +74,18 @@ body {
 .text-input:focus {
     outline: none;
     border-bottom-color: #4fc3f7;
+}
+
+.lg-button {
+    width: 100%;
+    border-radius: 5px;
+    padding: 10px;
+    background-color: #4fc3f7;
+    border: none;
+    color: #fafafa;
+    margin: 0.5em auto;
+}
+
+.lg-button:disabled {
+    opacity: 0.4;
 }

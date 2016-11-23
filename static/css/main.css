@@ -27,8 +27,51 @@ body {
 
 .tagline {
     font-weight: 100;
+    margin-bottom: 1em;
+    text-align: center;
+}
+
+.tagline span:last-child {
+    display: block;
 }
 
 .login-reg-form-container {
     margin-bottom: 2em;
+    width: 80%;
+}
+
+.label-input-group {
+    margin-bottom: 1em;
+}
+
+.label-input-group label {
+    font-size: 0.75em;
+    text-transform: uppercase;
+    display: block;
+}
+
+.label-input-group input {
+    display: block;
+}
+
+.text-input {
+    border: none;
+    background-color: #eee;
+    border-bottom: 2px solid #bdbdbd;
+    line-height: 1.5;
+    padding: 5px;
+    width: 100%;
+}
+
+.text-input.ng-dirty.ng-invalid:not(:focus) {
+    border-bottom-color: #e57373;
+}
+
+.text-input.ng-dirty.ng-valid:not(:focus) {
+    border-bottom-color: #81c784;
+}
+
+.text-input:focus {
+    outline: none;
+    border-bottom-color: #4fc3f7;
 }

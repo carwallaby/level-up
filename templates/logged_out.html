@@ -3,7 +3,11 @@
 {% block body %}
 <div class="logged-out-container">
     <h1 class="logo">Level Up!</h1>
-    <p class="tagline">Track your habits. See your progress. Get motivated.</p>
+    <p class="tagline">
+        <span>Track your habits.</span>
+        <span>See your progress.</span>
+        <span>Get motivated.</span>
+    </p>
     <div id="flash-container">
         {% with messages = get_flashed_messages(with_categories=True) %}
             {% if messages %}

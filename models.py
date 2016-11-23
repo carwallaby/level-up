@@ -195,7 +195,7 @@ class Habit(db.Model):
 
         if days_counted >= days_existed:
             # don't lose points for days that habit didn't exist
-            days_counted = 0
+            days_counted = (days_existed - 1)
 
         week_so_far = self.current_week_success or 0
         total_week_success = week_so_far * days_counted

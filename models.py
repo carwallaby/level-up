@@ -153,6 +153,12 @@ class Habit(db.Model):
         """Gets creation timestamp in user's timezone."""
         return self.user.convert_utc_to_local(self.created)
 
+    def _get_days_since_creation(self):
+        """Gets number of days since habit was created."""
+        creation_date = self.get_local_creation_timestamp().date()
+        today = self.user.current_arrow().date()
+        return (today - creation_date).days
+
     # ---------- success ----------
 
     def _get_relevant_completions(self):
@@ -179,11 +185,17 @@ class Habit(db.Model):
     def _set_midweek_metrics(self, latest):
         """Calculates current week's rating; sets up for new week if Sunday."""
         weekday = self._get_relevant_weekday()
+        days_existed = self._get_days_since_creation()
         # days already counted will be one less than yesterday
         days_counted = weekday - 2
+
         if days_counted <= 0:
             # there can be 1-6 days already counted
             days_counted = 6 + days_counted
+
+        if days_counted >= days_existed:
+            # don't lose points for days that habit didn't exist
+            days_counted = 0
 
         week_so_far = self.current_week_success or 0
         total_week_success = week_so_far * days_counted
@@ -244,6 +256,7 @@ class Habit(db.Model):
             'max_goal': self.max_goal,
             'timeframe': self.timeframe,
             'last_week_success': self.last_week_success,
+            'current_week_success': self.current_week_success,
             'done_today': self.done_today()
         }
 

@@ -5,7 +5,7 @@
 </div>
 <div ng-if="habits.length">
     <div ng-repeat="habit in getSortedHabits()" ng-class="{complete: habit.done_today}">
-        <a>{{ habit.title }}</a>
+        <a ui-sref="habit({id: habit.habit_id})">{{ habit.title }}</a>
         <form action="/api/complete-habit" method="POST">
             <input type="hidden" name="habit-id" value="{{ habit.habit_id }}" readonly>
             <input type="submit" value="Done!">

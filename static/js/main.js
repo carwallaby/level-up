@@ -27,4 +27,14 @@ lvlup
     $scope.showGoalOptions = function() {
         $scope.optionsShown = true;
     };
+})
+
+.controller('AccountController', function($scope, currentUser) {
+    $scope.currentUser = currentUser;
+})
+
+.controller('HabitViewController', function($scope, currentUser, habit) {
+    $scope.currentUser = currentUser;
+    $scope.habit = habit;
+    $scope.completions = habit.completions;
 });

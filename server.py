@@ -138,6 +138,21 @@ def get_user_habits():
     return jsonify(res)
 
 
+@app.route('/json/get-habit', methods=['GET'])
+@login_required
+def get_habit():
+    habit_id = request.args.get('habit-id')
+    habit = Habit.query.get(habit_id)
+
+    if not habit:
+        return jsonify({'error': 'Habit not found.'})
+    elif habit.user_id != current_user.user_id:
+        return jsonify({'error': 'Unauthorized.'})
+
+    completions = [c.dictionarify() for c in habit.completions]
+    return jsonify({'habit': habit.dictionarify(), 'completions': completions})
+
+
 # -------------------- api --------------------
 
 @app.route('/api/add-habit', methods=['POST'])
@@ -172,7 +187,7 @@ def complete_habit():
     habit_id = request.form.get('habit-id')
     habit = Habit.query.get(habit_id)
     if habit.user_id != current_user.user_id:
-        return jsonify({'error': 'unauthorized'})
+        return jsonify({'error': 'Unauthorized.'})
     completion = Completion(habit_id=habit_id)
     db.session.add(completion)
     db.session.commit()

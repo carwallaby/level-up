@@ -1,18 +1,22 @@
 {% extends 'base.html' %}
 
 {% block body %}
-<h1>Level Up!</h1>
-<h5>Track your habits. See your progress. Get motivated.</h5>
-<div id="flash-container">
-    {% with messages = get_flashed_messages(with_categories=True) %}
-        {% if messages %}
-            {% for category, message in messages %}
-                <div class="flash {{ category }}">{{ message }}</div>
-            {% endfor %}
-        {% endif %}
-    {% endwith %}
+<div class="logged-out-container">
+    <h1 class="logo">Level Up!</h1>
+    <p class="tagline">Track your habits. See your progress. Get motivated.</p>
+    <div id="flash-container">
+        {% with messages = get_flashed_messages(with_categories=True) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="flash {{ category }}">{{ message }}</div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+    </div>
+    <div class="login-reg-form-container">
+        <div ui-view></div>
+    </div>
 </div>
-<div ui-view></div>
 {% endblock %}
 
 {% block scripts %}

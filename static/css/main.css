@@ -1,0 +1,34 @@
+* {
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 300;
+    background-color: #fafafa;
+    color: #212121;
+}
+
+.logged-out-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+}
+
+.logo {
+    margin: 0;
+    font-weight: 100;
+    letter-spacing: -1px;
+    font-size: 2.25em;
+}
+
+.tagline {
+    font-weight: 100;
+}
+
+.login-reg-form-container {
+    margin-bottom: 2em;
+}

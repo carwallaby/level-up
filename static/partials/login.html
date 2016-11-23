@@ -1,10 +1,16 @@
 <form action="/auth/validate-login" method="POST" novalidate>
-    <label for="email">Email</label>
-    <input type="email" name="email" id="email" ng-model="email" required>
-    <label for="password">Password</label>
-    <input type="password" name="password" id="password" ng-model="password" required>
-    <input type="checkbox" name="remember" id="remember">
-    <label for="remember">Remember Me</label>
+    <div class="label-input-group">
+        <label for="email">Email</label>
+        <input type="email" name="email" id="email" ng-model="email" required>
+    </div>
+    <div class="label-input-group">
+        <label for="password">Password</label>
+        <input type="password" name="password" id="password" ng-model="password" required>
+    </div>
+    <div class="checkbox-group">
+        <input type="checkbox" name="remember" id="remember">
+        <label for="remember">Remember Me</label>
+    </div>
     <input type="submit" value="Log In" ng-disabled="!email || !password">
 </form>
 <a ui-sref="register">Sign Up</a>

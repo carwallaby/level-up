@@ -70,7 +70,7 @@ lvlup
                 });
             },
 
-            habit: function($http, $stateParams, $state) {
+            habitInfo: function($http, $stateParams, $state) {
                 var habitId = $stateParams.id;
                 var reqUrl = '/json/get-habit?habit-id=' + habitId;
 
@@ -85,6 +85,14 @@ lvlup
                 });
             }
         }
+    })
+
+    .state('habit.calendar', {
+        templateUrl: 'static/partials/calendar_view.html'
+    })
+
+    .state('habit.trends', {
+        templateUrl: 'static/partials/trends_view.html'
     });
 })
 

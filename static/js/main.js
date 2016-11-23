@@ -33,8 +33,10 @@ lvlup
     $scope.currentUser = currentUser;
 })
 
-.controller('HabitViewController', function($scope, currentUser, habit) {
+.controller('HabitViewController', function($scope, currentUser, habitInfo, $state) {
     $scope.currentUser = currentUser;
-    $scope.habit = habit;
-    $scope.completions = habit.completions;
+    $scope.habit = habitInfo.habit;
+    $scope.completions = habitInfo.completions;
+
+    $state.transitionTo('habit.calendar', {id: $scope.habit.habit_id});
 });

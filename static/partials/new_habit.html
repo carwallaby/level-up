@@ -1,12 +1,12 @@
 <form action="/api/add-habit" method="POST" novalidate>
     <label for="title">I want to log each time I</label>
     <input type="text" name="title" id="title" ng-model="title" maxlength="100" required>
-    <button type="button" ng-click="showGoalOptions()" ng-hide="optionsShown">Set Your Goals</button>
+    <button type="button" ng-click="showGoalOptions()" ng-hide="optionsShown">Set Specific Goals</button>
     <div ng-show="optionsShown" ng-cloak>
         <p>I want to do this</p>
         <div>
             <input type="checkbox" name="min-freq" id="min-freq" ng-model="minFreq">
-            <label for="min-freq">at least / exactly</label>
+            <label for="min-freq">at least</label>
             <input type="number" name="min-goal" id="min-goal" min="1" ng-model="minGoal" ng-disabled="!minFreq" ng-required="minFreq">
             <label for="min-goal">{{ minGoal === 1 ? 'time' : 'times' }}</label>
         </div>
@@ -15,7 +15,7 @@
             <label for="max-freq">no more than</label>
             <input type="number" name="max-goal" id="max-goal" min="1" ng-model="maxGoal" ng-disabled="!maxFreq" ng-required="maxFreq">
             <label for="max-goal">{{ maxGoal === 1 ? 'time' : 'times' }}</label>
-            <span ng-show="minGoal && maxGoal && (minGoal > maxGoal)">Your maximum goal must be higher than your minimum goal.</span>
+            <span ng-show="minFreq && maxFreq && (minGoal > maxGoal)">Your maximum goal must be equal to or higher than your minimum goal.</span>
         </div>
         <span>each</span>
         <select name="timeframe" ng-disabled="!minFreq && !maxFreq">
@@ -23,5 +23,5 @@
             <option value="week">week</option>
         </select>
     </div>
-    <input type="submit" value="Get Started" ng-disabled="!title || (minFreq ? !minGoal : false) || (maxFreq ? !maxGoal : false) || ((minGoal && maxGoal) ? (maxGoal < minGoal) : false)">
+    <input type="submit" value="Get Started" ng-disabled="!title || (minFreq ? !minGoal : false) || (maxFreq ? !maxGoal : false) || ((minFreq && maxFreq) ? (maxGoal < minGoal) : false)">
 </form>

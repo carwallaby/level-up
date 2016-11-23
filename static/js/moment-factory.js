@@ -20,5 +20,15 @@ lvlup
         return frequencies;
     };
 
+    momentFactory.getPastNDates = function(numDays) {
+        var dates = [];
+
+        for (var i = 0; i < numDays; i++) {
+            dates.push(moment().subtract(i, 'days'));
+        }
+
+        return dates;
+    };
+
     return momentFactory;
 });

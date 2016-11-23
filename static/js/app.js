@@ -21,10 +21,28 @@ lvlup
     })
     .state('home', {
         url: '/home',
-        templateUrl: 'static/partials/home.html'
+        templateUrl: 'static/partials/home.html',
+        controller: 'HomeController',
+        resolve: {
+            currentUser: function($http) {
+                return $http.get('/json/get-current-user').then(function(res) {
+                    return res.data;
+                });
+            },
+
+            habits: function($http) {
+                return $http.get('/json/get-user-habits').then(function(res) {
+                    return res.data;
+                });
+            }
+        }
+    })
+    .state('new-habit', {
+        url: '/new-habit',
+        templateUrl: 'static/partials/new_habit.html',
+        controller: 'NewHabitController'
     });
 })
-
 .run(function($rootScope, $state, $timeout) {
     $rootScope.$on('$stateChangeSuccess', function() {
         var flashContainer = document.getElementById('flash-container');

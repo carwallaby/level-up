@@ -219,6 +219,19 @@ class Habit(db.Model):
             # gets percentage completed
             return len(comps) / float(self.min_goal)
 
+    # ---------- utility ----------
+
+    def done_today(self):
+        """Returns whether or not habit has been 'completed' for the day."""
+        today = self.user.current_arrow().date()
+        todays_completions = [c for c in self.completions if
+                              c.get_local_timestamp().date() == today]
+        if self.max_goal:
+            return len(todays_completions) >= self.max_goal
+
+        min_goal = self.min_goal or 1
+        return len(todays_completions) >= min_goal
+
     # ---------- dictionarify ----------
 
     def dictionarify(self):
@@ -230,7 +243,8 @@ class Habit(db.Model):
             'min_goal': self.min_goal,
             'max_goal': self.max_goal,
             'timeframe': self.timeframe,
-            'last_week_success': self.last_week_success
+            'last_week_success': self.last_week_success,
+            'done_today': self.done_today()
         }
 
         return data

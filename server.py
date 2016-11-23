@@ -51,6 +51,9 @@ def logged_out():
 
 
 @app.route('/home')
+@app.route('/new-habit')
+@app.route('/account')
+@app.route('/habit')
 @login_required
 def logged_in():
     """Passes view routing to client."""
@@ -120,6 +123,61 @@ def validate_location():
         return jsonify({'error': e.message})
 
     return jsonify(possible_locations)
+
+
+@app.route('/json/get-current-user', methods=['GET'])
+@login_required
+def get_current_user():
+    return jsonify(current_user.dictionarify())
+
+
+@app.route('/json/get-user-habits', methods=['GET'])
+@login_required
+def get_user_habits():
+    res = [h.dictionarify() for h in current_user.habits]
+    return jsonify(res)
+
+
+# -------------------- api --------------------
+
+@app.route('/api/add-habit', methods=['POST'])
+@login_required
+def add_habit():
+    title = request.form.get('title')
+    user_id = current_user.user_id
+    # optional fields
+    min_goal = None
+    max_goal = None
+
+    if bool(request.form.get('min-freq')):
+        min_goal = request.form.get('min-goal')
+
+    if bool(request.form.get('max-freq')):
+        max_goal = request.form.get('max-goal')
+
+    # can be None, this is fine
+    timeframe = request.form.get('timeframe')
+
+    habit = Habit(user_id=user_id, title=title, min_goal=min_goal,
+                  max_goal=max_goal, timeframe=timeframe)
+    db.session.add(habit)
+    db.session.commit()
+    flash('Good luck!', 'success')
+    return redirect('/home')
+
+
+@app.route('/api/complete-habit', methods=['POST'])
+@login_required
+def complete_habit():
+    habit_id = request.form.get('habit-id')
+    habit = Habit.query.get(habit_id)
+    if habit.user_id != current_user.user_id:
+        return jsonify({'error': 'unauthorized'})
+    completion = Completion(habit_id=habit_id)
+    db.session.add(completion)
+    db.session.commit()
+    flash('Successfully logged completion.', 'success')
+    return redirect('/home')
 
 
 # -------------------- server --------------------

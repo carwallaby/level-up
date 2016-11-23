@@ -1,1 +1,3 @@
-<canvas line-chart></canvas>
+<a ng-click="changeDays(7)" ng-class="{active: days === 7}">Week</a>
+<a ng-click="changeDays(30)" ng-class="{active: days === 30}">Month</a>
+<canvas line-chart completions="completions" days="{{ days }}"></canvas>

@@ -37,6 +37,12 @@ lvlup
     $scope.currentUser = currentUser;
     $scope.habit = habitInfo.habit;
     $scope.completions = habitInfo.completions;
-
     $state.transitionTo('habit.calendar', {id: $scope.habit.habit_id});
+
+    $scope.days = 7;
+    $scope.changeDays = function(numDays) {
+        if (numDays !== $scope.days) {
+            $scope.days = numDays;
+        }
+    };
 });

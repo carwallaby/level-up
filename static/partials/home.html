@@ -1,4 +1,5 @@
-<h3>{{ currentUser.is_birthday ? 'Happy Birthday' : 'Hello' }}<span ng-if="currentUser.name">, {{ currentUser.name }}</span>!</h3>
+<p class="greeting">{{ currentUser.is_birthday ? 'Happy Birthday' : 'Hello' }}<span ng-if="currentUser.name">, {{ currentUser.name }}</span>!</p>
+<p class="greeting-sub">It is <lvl-clock start-time="currentUser.local_now"></lvl-clock> in {{ location }}.</p>
 <div ng-if="!habits.length">
     <p><a ui-sref="new-habit">Add a new habit</a> to get started!</p>
     <p><a ui-sref="account">Finish setting up your account</a> to personalize your experience.</p>

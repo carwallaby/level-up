@@ -4,6 +4,8 @@ lvlup
 .controller('HomeController', function($scope, currentUser, habits) {
     $scope.currentUser = currentUser;
     $scope.habits = habits;
+    var userLocation = $scope.currentUser.location;
+    $scope.location = userLocation.split(', ')[0];
 
     $scope.getSortedHabits = function() {
         var toDo = [];
@@ -19,6 +21,22 @@ lvlup
 
         return toDo.concat(completed);
     };
+})
+
+.directive('lvlClock', function($interval) {
+    return {
+        restrict: 'E',
+        templateUrl: 'static/partials/clock.html',
+        scope: {
+            startTime: '='
+        },
+        link: function(scope, element, attr) {
+            scope.time = moment(scope.startTime);
+            $interval(function() {
+                scope.time.add(1, 'seconds');
+            }, 1000)
+        }
+    }
 })
 
 .controller('NewHabitController', function($scope) {

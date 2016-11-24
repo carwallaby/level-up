@@ -11,6 +11,7 @@ lvlup
         link: function(scope, element, attrs) {
             var localNow = moment(scope.localDate);
             scope.frequencies = TrendFactory.tallyCompletionsByDate(scope.completions);
+            scope.daysOfWeek = moment.weekdaysShort();
 
             function loadNewMonth() {
                 scope.monthString = moment().month(scope.currentMonth).format('MMMM');

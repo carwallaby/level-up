@@ -43,6 +43,12 @@ lvlup
 
     trendFactory.getDatesByMonthAndYear = function(monthString, year) {
         var completeMonth = [];
+        var firstWeekDay = moment().year(year).month(monthString).date(1).weekday();
+
+        for (var i = firstWeekDay; i > 0; i--) {
+            var nextDay = moment().year(year).month(monthString).date(1 - i);
+            completeMonth.push(nextDay);
+        }
 
         for (var i = 0; i <= 31; i++) {
             var nextDay = moment().year(year).month(monthString).date(1 + i);

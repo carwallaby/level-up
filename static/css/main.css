@@ -319,6 +319,42 @@ select:disabled {
     margin-top: 0.5em;
 }
 
+.calendar-tabs {
+    text-align: center;
+    display: flex;
+    justify-content: space-between;
+    margin: 1em;
+}
+
+.calendar-tabs a {
+    display: inline-block;
+    padding: 5px;
+    border: 1px solid #4fc3f7;
+    border-radius: 5px;
+    font-size: 0.8em;
+}
+
+.calendar-title {
+    font-weight: 100;
+    font-size: 1.5em;
+    text-align: center;
+}
+
+.weekday-container {
+    margin: 1em 0;
+    display: flex;
+    justify-content: space-around;
+}
+
+.weekday {
+    font-weight: 100;
+    text-align: center;
+    display: inline-block;
+    font-size: 0.7em;
+    color: #4fc3f7;
+    text-transform: uppercase;
+}
+
 @media screen and (min-width: 450px) {
     .mobile-header-links {
         display: none;

@@ -10,6 +10,22 @@ body {
     color: #212121;
 }
 
+#flash-container {
+    width: 80%;
+}
+
+.flash {
+    font-size: 0.75em;
+    background-color: #eee;
+    padding: 10px;
+    margin: 1em auto;
+    text-align: center;
+}
+
+.flash.error {
+    color: #e57373;
+}
+
 .logged-out-container {
     display: flex;
     flex-direction: column;
@@ -40,7 +56,8 @@ body {
     width: 80%;
 }
 
-.label-input-group {
+.label-input-group,
+.checkbox-group {
     margin-bottom: 1em;
 }
 
@@ -88,4 +105,37 @@ body {
 
 .lg-button:disabled {
     opacity: 0.4;
+}
+
+.switch-login-reg {
+    display: block;
+    text-align: right;
+    margin-top: 1em;
+}
+
+#location-results {
+    background-color: #eee;
+    padding: 5px;
+    margin-bottom: 0.5em;
+}
+
+#location-results span {
+    display: block;
+    font-size: 0.8em;
+    margin-bottom: 1em;
+}
+
+#location-results a {
+    display: block;
+    font-size: 0.8em;
+    margin: 0.5em 0;
+    padding: 10px;
+    background-color: #fafafa;
+}
+
+#location-results a:last-child {
+    text-align: right;
+    margin-top: 1em;
+    padding: 0;
+    background-color: #eee;
 }

@@ -26,7 +26,7 @@ lvlup
 .directive('lvlClock', function($interval) {
     return {
         restrict: 'E',
-        templateUrl: 'static/partials/clock.html',
+        template: '{{ time.format(\'h:mm a\') }} on {{ time.format(\'MMMM Do\') }}',
         scope: {
             startTime: '='
         },

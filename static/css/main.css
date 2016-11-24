@@ -127,7 +127,9 @@ a:hover {
     margin: 0.5em auto;
 }
 
-.lg-button:disabled {
+.lg-button:disabled,
+.sm-button:disabled,
+.md-button:disabled {
     opacity: 0.4;
 }
 
@@ -137,6 +139,28 @@ a:hover {
     background-color: #4fc3f7;
     border: none;
     color: #fafafa;
+}
+
+.md-button {
+    display: block;
+    margin: 1.5em auto;
+    border-radius: 5px;
+    padding: 10px;
+    background-color: #4fc3f7;
+    border: none;
+    color: #fafafa;
+    width: 200px;
+}
+
+.md-button-invert {
+    display: block;
+    margin: 1.5em auto;
+    border-radius: 5px;
+    border: 2px solid #4fc3f7;
+    background-color: #fafafa;
+    color: #4fc3f7;
+    padding: 10px;
+    width: 200px;
 }
 
 .switch-login-reg {
@@ -207,13 +231,13 @@ header a {
 }
 
 .main-container {
-    margin-top: 1em;
+    padding: 1em;
 }
 
 .greeting {
     font-weight: 100;
     text-align: center;
-    font-size: 1.25em;
+    font-size: 1.5em;
 }
 
 .greeting-sub {
@@ -247,6 +271,54 @@ header a {
     line-height: 1.5;
 }
 
+.new-habit-container {
+    margin-top: 1em;
+    text-align: center;
+}
+
+.habit-options {
+    margin: 1em auto 2em;
+    width: 80%;
+    max-width: 300px;
+}
+
+.text-input-sm {
+    line-height: 1;
+    width: 3em;
+}
+
+.text-input-sm:disabled,
+.text-input-sm.ng-valid.ng-dirty:disabled {
+    color: #eee;
+    border-bottom-color: #eee;
+}
+
+.min-max-goals {
+    text-align: left;
+    margin: 1.5em auto;
+}
+
+.min-max-goals > div {
+    margin-bottom: 1.5em;
+}
+
+select {
+    background-color: #eee;
+    border: 2px solid #bdbdbd;
+}
+
+select:disabled {
+    color: #bdbdbd;
+}
+
+.goal-error {
+    text-align: center;
+    display: block;
+    color: #e57373;
+    font-size: 0.8em;
+    margin-top: 0.5em;
+}
+
 @media screen and (min-width: 450px) {
     .mobile-header-links {
         display: none;
@@ -258,5 +330,9 @@ header a {
 
     .flash {
         font-size: 1em;
+    }
+
+    .habit-label {
+        display: inline-block;
     }
 }

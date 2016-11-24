@@ -2,10 +2,17 @@
 
 {% block body %}
 <header>
-    <a ui-sref="home">Level Up!</a>
-    <a ui-sref="new-habit">Add Habit</a>
-    <a ui-sref="account">Account</a>
-    <a href="/logout" target="_self">Log Out</a>
+    <a ui-sref="home" class="header-logo">Level Up!</a>
+    <div class="header-links mobile-header-links">
+        <a ui-sref="new-habit"><i class="fa fa-plus"></i></a>
+        <a ui-sref="account"><i class="fa fa-cog"></i></a>
+        <a href="/logout" target="_self"><i class="fa fa-sign-out"></i></a>
+    </div>
+    <div class="header-links main-header-links">
+        <a ui-sref="new-habit">Add Habit</a>
+        <a ui-sref="account">Account</a>
+        <a href="/logout" target="_self">Log Out</a>
+    </div>
 </header>
 <div id="flash-container">
     {% with messages = get_flashed_messages(with_categories=True) %}

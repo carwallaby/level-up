@@ -8,7 +8,7 @@
         <a ui-sref="habit({id: habit.habit_id})">{{ habit.title }}</a>
         <form action="/api/complete-habit" method="POST">
             <input type="hidden" name="habit-id" value="{{ habit.habit_id }}" readonly>
-            <input type="submit" value="Done!">
+            <button type="submit"><i class="fa fa-check"></i></button>
         </form>
     </div>
 </div>

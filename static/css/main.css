@@ -23,11 +23,11 @@ a {
     background-color: #eee;
     padding: 10px;
     text-align: center;
+    font-size: 0.75em;
 }
 
 .logged-out-container .flash {
     margin: 1em auto;
-    font-size: 0.75em;
 }
 
 .flash.error {
@@ -198,5 +198,9 @@ header a {
 
     .main-header-links {
         display: block;
+    }
+
+    .flash {
+        font-size: 1em;
     }
 }

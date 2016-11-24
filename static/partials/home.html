@@ -4,12 +4,12 @@
     <p><a ui-sref="new-habit">Add a new habit</a> to get started!</p>
     <p><a ui-sref="account">Finish setting up your account</a> to personalize your experience.</p>
 </div>
-<div ng-if="habits.length">
-    <div ng-repeat="habit in getSortedHabits()" ng-class="{complete: habit.done_today}">
+<div ng-if="habits.length" class="habit-container">
+    <div ng-repeat="habit in getSortedHabits()" class="habit" ng-class="{complete: habit.done_today}">
         <a ui-sref="habit({id: habit.habit_id})">{{ habit.title }}</a>
         <form action="/api/complete-habit" method="POST">
             <input type="hidden" name="habit-id" value="{{ habit.habit_id }}" readonly>
-            <button type="submit"><i class="fa fa-check"></i></button>
+            <button type="submit" class="sm-button"><i class="fa fa-check"></i></button>
         </form>
     </div>
 </div>

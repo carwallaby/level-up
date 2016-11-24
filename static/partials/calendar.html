@@ -1,9 +1,9 @@
+<p class="calendar-title">{{ monthString }} {{ currentYear }}</p>
 <div class="calendar-tabs">
     <a ng-click="changeMonth(-1)">Previous</a>
-    <a ng-click="onCurrentMonth ? null : loadCurrentMonth()">Today</a>
-    <a ng-click="onCurrentMonth ? null : changeMonth(1)">Next</a>
+    <a ng-click="loadCurrentMonth()" ng-class="{disabled: onCurrentMonth}">Today</a>
+    <a ng-click="changeMonth(1)" ng-class="{disabled: onCurrentMonth}">Next</a>
 </div>
-<p class="calendar-title">{{ monthString }} {{ currentYear }}</p>
 <div class="weekday-container">
     <div ng-repeat="day in daysOfWeek" class="weekday">
         <span>{{ day }}</span>

@@ -334,10 +334,16 @@ select:disabled {
     font-size: 0.8em;
 }
 
+.calendar-tabs a.disabled {
+    color: #9e9e9e;
+    border-color: #9e9e9e;
+}
+
 .calendar-title {
     font-weight: 100;
     font-size: 1.5em;
     text-align: center;
+    margin-top: 1em;
 }
 
 .weekday-container {

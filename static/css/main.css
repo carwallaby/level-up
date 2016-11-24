@@ -10,8 +10,9 @@ body {
     color: #212121;
 }
 
-#flash-container {
+.logged-out-container #flash-container {
     width: 80%;
+    max-width: 400px;
 }
 
 .flash {
@@ -24,6 +25,10 @@ body {
 
 .flash.error {
     color: #e57373;
+}
+
+.flash.success {
+    color: #81c784;
 }
 
 .logged-out-container {
@@ -54,6 +59,7 @@ body {
 .login-reg-form-container {
     margin-bottom: 2em;
     width: 80%;
+    max-width: 400px;
 }
 
 .label-input-group,
@@ -91,6 +97,10 @@ body {
 .text-input:focus {
     outline: none;
     border-bottom-color: #4fc3f7;
+}
+
+.text-input:disabled {
+    color: #757575;
 }
 
 .lg-button {

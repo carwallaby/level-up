@@ -195,6 +195,23 @@ def complete_habit():
     return redirect('/home')
 
 
+@app.route('/api/delete-habit')
+@login_required
+def delete_habit():
+    habit_id = request.args.get('habit-id')
+    habit = Habit.query.get(habit_id)
+
+    if habit.user_id != current_user.user_id:
+        return jsonify('error')
+
+    for completion in habit.completions:
+        db.session.delete(completion)
+
+    db.session.delete(habit)
+    db.session.commit()
+    return jsonify('success')
+
+
 # -------------------- server --------------------
 
 if __name__ == '__main__':

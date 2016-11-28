@@ -6,7 +6,7 @@
 </div>
 <div class="edit-buttons">
     <a ui-sref="edit-habit">Edit</a>
-    <a href="/api/delete-habit" target="_self">Delete</a>
+    <a ng-click="deleteHabit(habit.habit_id)">Delete</a>
 </div>
 <div class="habit-tabs">
     <a ui-sref=".calendar" ui-sref-active="active">Calendar</a><a ui-sref=".trends" ui-sref-active="active">Trends</a>

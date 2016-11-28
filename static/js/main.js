@@ -53,7 +53,7 @@ lvlup
     $scope.currentUser = currentUser;
 })
 
-.controller('HabitViewController', function($scope, currentUser, habitInfo, $state) {
+.controller('HabitViewController', function($scope, currentUser, habitInfo, $state, $http) {
     $scope.currentUser = currentUser;
     $scope.habit = habitInfo.habit;
     $scope.completions = habitInfo.completions;
@@ -63,6 +63,16 @@ lvlup
     $scope.changeDays = function(numDays) {
         if (numDays !== $scope.days) {
             $scope.days = numDays;
+        }
+    };
+
+    $scope.deleteHabit = function(habitId) {
+        var confirmation = confirm('Are you sure? All habit and completion data will be deleted permanently.');
+
+        if (confirmation) {
+            return $http.get('/api/delete-habit?habit-id=' + habitId).then(function() {
+                $state.go('home');
+            });
         }
     };
 });

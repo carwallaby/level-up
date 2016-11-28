@@ -8,8 +8,8 @@ lvlup
         var frequencies = {};
 
         for (var i = 0; i < completions.length; i++) {
-            var naiveTimestamp = completions[i].timestamp.split('+');
-            var timestamp = moment(naiveTimestamp[0]);
+            var naiveTimestamp = completions[i].timestamp.slice(0, -6);
+            var timestamp = moment(naiveTimestamp);
             var date = timestamp.format('MMM D YYYY');
 
             if (date in frequencies) {

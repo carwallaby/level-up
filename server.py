@@ -220,6 +220,12 @@ def update_name():
     return jsonify('success')
 
 
+@app.route('/api/update-sms', methods=['POST'])
+@login_required
+def update_sms():
+    pass
+
+
 # -------------------- server --------------------
 
 if __name__ == '__main__':

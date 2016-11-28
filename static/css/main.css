@@ -207,7 +207,7 @@ a:hover {
 header {
     padding: 10px;
     display: flex;
-    background-color: #f5f5f5;
+    background-color: #eee;
 }
 
 header a {
@@ -267,14 +267,15 @@ header a {
     display: flex;
     justify-content: space-between;
     padding: 1em;
+    transition: border-color 0.2s, background-color 0.2s;
 }
 
 .habit.complete {
-    border-color: #b3e5fc;
+    border-color: #b0bec5;
 }
 
 .habit.complete .sm-button {
-    border-color: #b3e5fc;
+    border-color: #b0bec5;
 }
 
 .habit a {
@@ -284,6 +285,15 @@ header a {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+}
+
+.habit a:hover {
+    color: #81c784;
+}
+
+.habit:hover {
+    border-color: #81c784;
+    background-color: #eee;
 }
 
 .new-habit-container {

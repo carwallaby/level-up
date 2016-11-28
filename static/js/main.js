@@ -32,8 +32,8 @@ lvlup
         },
         link: function(scope, element, attr) {
             // get rid of ISO timezone so time is parsed as naive
-            var naive = scope.startTime.split('+');
-            scope.time = moment(naive[0]);
+            var naive = scope.startTime.slice(0, -6);
+            scope.time = moment(naive);
             $interval(function() {
                 scope.time.add(1, 'seconds');
             }, 1000)
@@ -61,6 +61,11 @@ lvlup
         $http.post(reqUrl, {name: name}).then(function(res) {
             $state.reload();
         });
+    };
+
+    $scope.smsFormShown = false;
+    $scope.toggleSmsForm = function() {
+        $scope.smsFormShown = !$scope.smsFormShown;
     };
 })
 

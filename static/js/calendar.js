@@ -10,8 +10,8 @@ lvlup
         },
         link: function(scope, element, attrs) {
             // get rid of ISO timezone so time is parsed as naive
-            var naive = scope.localDate.split('+');
-            scope.localNow = moment(naive[0]);
+            var naive = scope.localDate.slice(0, -6);
+            scope.localNow = moment(naive);
             scope.frequencies = TrendFactory.tallyCompletionsByDate(scope.completions);
             scope.daysOfWeek = moment.weekdaysShort();
 

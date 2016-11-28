@@ -97,7 +97,7 @@ lvlup
 
     .state('edit-habit', {
         url: '/edit-habit?:id',
-        template: 'asdf',
+        template: 'static/partials/edit_habit.html',
         controller: 'EditHabitController',
         resolve: {
             habit: function($http, $stateParams) {

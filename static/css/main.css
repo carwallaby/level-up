@@ -334,7 +334,12 @@ select:disabled {
     margin: 1em;
 }
 
-.calendar-tabs a {
+.trend-tabs {
+    margin: 1em;
+}
+
+.calendar-tabs a,
+.trend-tabs a {
     display: inline-block;
     padding: 5px 20px;
     border: 1px solid #4fc3f7;
@@ -343,12 +348,14 @@ select:disabled {
     transition: background-color 0.2s, color 0.2s;
 }
 
-.calendar-tabs a.disabled {
+.calendar-tabs a.disabled,
+.trend-tabs a.disabled {
     color: #9e9e9e;
     border-color: #9e9e9e;
 }
 
-.calendar-tabs a:hover:not(.disabled) {
+.calendar-tabs a:hover:not(.disabled),
+.trend-tabs a:hover:not(.disabled) {
     background-color: #4fc3f7;
     color: #fafafa;
     cursor: pointer;

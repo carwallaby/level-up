@@ -1,3 +1,5 @@
-<a ng-click="changeDays(7)" ng-class="{active: days === 7}">Week</a>
-<a ng-click="changeDays(30)" ng-class="{active: days === 30}">Month</a>
+<div class="trend-tabs">
+    <a ng-click="changeDays(7)" ng-class="{disabled: days === 7}">Week</a>
+    <a ng-click="changeDays(30)" ng-class="{disabled: days === 30}">Month</a>
+</div>
 <canvas lvl-line-chart completions="completions" days="{{ days }}"></canvas>

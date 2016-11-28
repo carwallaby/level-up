@@ -5,7 +5,7 @@
     <div ng-if="habit.max_goal" class="habit-info">No more than <span>{{ habit.max_goal }} {{ habit.max_goal === 1 ? 'time' : 'times' }}</span> per {{ habit.timeframe }}.</div>
 </div>
 <div class="edit-buttons">
-    <a ui-sref="edit-habit">Edit</a>
+    <a ui-sref="edit-habit({id: habit.habit_id})">Edit</a>
     <a ng-click="deleteHabit(habit.habit_id)">Delete</a>
 </div>
 <div class="habit-tabs">

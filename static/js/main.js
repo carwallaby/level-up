@@ -75,4 +75,9 @@ lvlup
             });
         }
     };
+})
+
+.controller('EditHabitController', function($scope, habit) {
+    $scope.habit = habit;
+    console.log($scope.habit);
 });

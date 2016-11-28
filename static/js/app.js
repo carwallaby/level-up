@@ -93,6 +93,26 @@ lvlup
 
     .state('habit.trends', {
         templateUrl: 'static/partials/trends_view.html'
+    })
+
+    .state('edit-habit', {
+        url: '/edit-habit?:id',
+        template: 'asdf',
+        controller: 'EditHabitController',
+        resolve: {
+            habit: function($http, $stateParams) {
+                var habitId = $stateParams.id;
+                var reqUrl = '/json/get-habit?habit-id=' + habitId;
+
+                return $http.get(reqUrl).then(function(res) {
+                    if ('error' in res.data) {
+                        $state.go('home', {});
+                    } else {
+                        return res.data.habit;
+                    }
+                });
+            }
+        }
     });
 })
 

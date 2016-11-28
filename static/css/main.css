@@ -473,7 +473,8 @@ select:disabled {
 
 .habit-tabs {
     text-align: center;
-    margin-top: 1em;
+    margin-top: 2em;
+    margin-bottom: 2em;
 }
 
 .habit-tabs a {
@@ -521,6 +522,25 @@ select:disabled {
 
     .habit-label {
         display: inline-block;
+    }
+
+    .calendar-box {
+        height: 5em;
+    }
+
+    .completion-num {
+        margin-top: 1em;
+    }
+
+    .habit-tabs {
+        margin-top: 1.5em;
+        margin-bottom: 1.5em;
+    }
+}
+
+@media screen and (min-width: 750px) {
+    .calendar-box {
+        height: 6em;
     }
 }
 

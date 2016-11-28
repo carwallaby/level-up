@@ -391,6 +391,7 @@ select:disabled {
     text-align: center;
     border: 1px solid #81c784;
     background-color: #f5f5f5;
+    padding: 2px;
 }
 
 .calendar-box.other-month {

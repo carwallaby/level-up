@@ -1,0 +1,26 @@
+engines:
+  csslint:
+    enabled: true
+  duplication:
+    enabled: true
+    config:
+      languages:
+        javascript:
+        python:
+          python_version: 2
+  eslint:
+    enabled: true
+  fixme:
+    enabled: true
+  radon:
+    enabled: true
+    config:
+      python_version: 2
+      threshold: "C"
+ratings:
+  paths:
+    - "**.css"
+    - "**.js"
+    - "**.py"
+  exclude_paths:
+    - env/**/*

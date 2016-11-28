@@ -4,6 +4,10 @@
     <div ng-if="habit.min_goal" class="habit-info">At least <span>{{ habit.min_goal }} {{ habit.min_goal === 1 ? 'time' : 'times' }}</span> per {{ habit.timeframe }}.</div>
     <div ng-if="habit.max_goal" class="habit-info">No more than <span>{{ habit.max_goal }} {{ habit.max_goal === 1 ? 'time' : 'times' }}</span> per {{ habit.timeframe }}.</div>
 </div>
+<div class="edit-buttons">
+    <a ui-sref="edit-habit">Edit</a>
+    <a href="/api/delete-habit" target="_self">Delete</a>
+</div>
 <div class="habit-tabs">
     <a ui-sref=".calendar" ui-sref-active="active">Calendar</a><a ui-sref=".trends" ui-sref-active="active">Trends</a>
 </div>

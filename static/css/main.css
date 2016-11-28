@@ -345,6 +345,10 @@ select:disabled {
     margin: 1em;
 }
 
+.edit-buttons {
+    margin-top: 1em;
+}
+
 .calendar-tabs a,
 .trend-tabs a {
     display: inline-block;
@@ -353,6 +357,19 @@ select:disabled {
     border-radius: 5px;
     font-size: 0.8em;
     transition: background-color 0.2s, color 0.2s;
+}
+
+.edit-buttons a {
+    padding: 5px 20px;
+    display: inline-block;
+    background-color: #9e9e9e;
+    color: #fafafa;
+    font-size: 0.8em;
+    border-radius: 5px;
+}
+
+.edit-buttons a:hover {
+    cursor: pointer;
 }
 
 .calendar-tabs a.disabled,

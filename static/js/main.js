@@ -51,6 +51,7 @@ lvlup
 
 .controller('AccountController', function($scope, currentUser, $http, $state) {
     $scope.currentUser = currentUser;
+    console.log($scope.currentUser);
 
     $scope.nameFormShown = false;
     $scope.toggleNameForm = function() {
@@ -66,6 +67,29 @@ lvlup
     $scope.smsFormShown = false;
     $scope.toggleSmsForm = function() {
         $scope.smsFormShown = !$scope.smsFormShown;
+    };
+    $scope.updateSms = function(smsNum) {
+        var reqUrl = '/api/update-sms';
+        $http.post(reqUrl, {sms: smsNum}).then(function(res) {
+            $state.reload();
+        });
+    };
+    $scope.deleteSms = function() {
+        var reqUrl = '/api/update-sms';
+        $http.post(reqUrl, {sms: null}).then(function(res) {
+            $state.reload();
+        });
+    };
+
+    $scope.remindersFormShown = false;
+    $scope.toggleRemindersForm = function() {
+        $scope.remindersFormShown = !$scope.remindersFormShown;
+    };
+    $scope.updateReminders = function(reminders) {
+        var reqUrl = '/api/update-reminders';
+        $http.post(reqUrl, {reminders: reminders}).then(function(res) {
+            $state.reload();
+        });
     };
 })
 

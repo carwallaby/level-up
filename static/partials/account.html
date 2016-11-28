@@ -12,17 +12,23 @@
     <div class="account-field" id="account-sms">
         <form ng-show="!currentUser.sms_num || smsFormShown" ng-submit="updateSms(sms)" novalidate>
             <label for="sms">SMS Number:</label>
-            <input type="text" name="sms" id="sms" ng-model="sms" class="text-input" ng-value="currentUser.sms_num" ng-pattern="/^(\([0-9]{3}\)|[0-9]{3})(\s|-)?[0-9]{3}(\s|-)?[0-9]{4}$/" required>
-            <label for="reminders">Reminders:</label>
-            <select name="reminders" id="reminders" ng-disabled="!currentUser.sms_num && !sms">
-                <option value="off">None</option>
-                <option value="daily">Daily</option>
-                <option value="weekly">Weekly</option>
-            </select>
+            <input type="text" name="sms" id="sms" ng-model="sms" class="text-input" ng-value="currentUser.sms_num.slice(2)" maxlength="14" ng-pattern="/^(\([0-9]{3}\)|[0-9]{3})(\s|-)?[0-9]{3}(\s|-)?[0-9]{4}$/" required>
             <input type="submit" value="Save" ng-disabled="!sms">
             <button type="button" ng-click="deleteSms()" ng-hide="!currentUser.sms_num">Delete</button>
             <button type="button" ng-click="toggleSmsForm()" ng-hide="!currentUser.sms_num">Cancel</button>
             <p class="disclaimer">Enter your mobile phone number and enable reminders to get daily or weekly SMS notifications. Currently for United States mobile phone numbers only. Please include area code.</p>
         </form>
+        <p ng-show="currentUser.sms_num && !smsFormShown"><span class="pop">SMS Number</span>: {{ currentUser.sms_num }} <button type="button" ng-click="toggleSmsForm()">Edit</button></p>
+    </div>
+    <div class="account-field" id="account-reminders">
+        <form ng-show="currentUser.sms_num && remindersFormShown" ng-submit="updateReminders(reminders)" novalidate>
+            <span>Reminders:</span>
+            <input type="radio" name="reminders" ng-model="reminders" id="none" value="none" ng-checked="!currentUser.reminders"><label for="none">Off</label>
+            <input type="radio" name="reminders" ng-model="reminders" id="daily" value="daily" ng-checked="currentUser.reminders === 'daily'"><label for="daily">Daily</label>
+            <input type="radio" name="reminders" ng-model="reminders" id="weekly" value="weekly" ng-checked="currentUser.reminders === 'weekly'"><label for="weekly">Weekly (Sundays)</label>
+            <input type="submit" value="Save">
+            <button type="button" ng-click="toggleRemindersForm()">Cancel</button>
+        </form>
+        <p ng-show="currentUser.sms_num && !remindersFormShown"><span class="pop">Reminders</span>: {{ currentUser.reminders ? (currentUser.reminders === 'weekly' ? 'Weekly' : 'Daily') : 'Off' }} <button type="button" ng-click="toggleRemindersForm()">Edit</button></p>
     </div>
 </div>

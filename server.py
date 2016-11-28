@@ -223,7 +223,30 @@ def update_name():
 @app.route('/api/update-sms', methods=['POST'])
 @login_required
 def update_sms():
-    pass
+    form = request.json
+    sms_str = form.get('sms')
+
+    if not sms_str:
+        current_user.sms_num = None
+        current_user.reminders = None
+    else:
+        sms = ''.join([char for char in sms_str.strip() if char.isdigit()])
+        current_user.sms_num = '+1' + sms
+
+    db.session.commit()
+    return jsonify('success')
+
+
+@app.route('/api/update-reminders', methods=['POST'])
+@login_required
+def update_reminders():
+    reminders = request.json.get('reminders')
+    if not reminders or reminders == 'none':
+        current_user.reminders = None
+    else:
+        current_user.reminders = reminders
+    db.session.commit()
+    return jsonify('success')
 
 
 # -------------------- server --------------------

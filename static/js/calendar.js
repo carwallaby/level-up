@@ -9,19 +9,21 @@ lvlup
             completions: '='
         },
         link: function(scope, element, attrs) {
-            var localNow = moment(scope.localDate);
+            // get rid of ISO timezone so time is parsed as naive
+            var naive = scope.localDate.split('+');
+            scope.localNow = moment(naive[0]);
             scope.frequencies = TrendFactory.tallyCompletionsByDate(scope.completions);
             scope.daysOfWeek = moment.weekdaysShort();
 
             function loadNewMonth() {
                 scope.monthString = moment().month(scope.currentMonth).format('MMMM');
                 scope.dates = TrendFactory.getDatesByMonthAndYear(scope.monthString, scope.currentYear);
-                scope.onCurrentMonth = (scope.currentMonth === localNow.month() && scope.currentYear === localNow.year());
+                scope.onCurrentMonth = (scope.currentMonth === scope.localNow.month() && scope.currentYear === scope.localNow.year());
             }
 
             scope.loadCurrentMonth = function() {
-                scope.currentMonth = localNow.month();
-                scope.currentYear = localNow.year();
+                scope.currentMonth = scope.localNow.month();
+                scope.currentYear = scope.localNow.year();
                 loadNewMonth();
             };
 
@@ -33,7 +35,7 @@ lvlup
             };
 
             scope.isToday = function(date) {
-                return date.format('YYYY-MM-DD') === localNow.format('YYYY-MM-DD');
+                return date.format('YYYY-MM-DD') === scope.localNow.format('YYYY-MM-DD');
             };
 
             scope.loadCurrentMonth();

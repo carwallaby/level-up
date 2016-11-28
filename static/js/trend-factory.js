@@ -8,7 +8,8 @@ lvlup
         var frequencies = {};
 
         for (var i = 0; i < completions.length; i++) {
-            var timestamp = moment(completions[i].timestamp);
+            var naiveTimestamp = completions[i].timestamp.split('+');
+            var timestamp = moment(naiveTimestamp[0]);
             var date = timestamp.format('MMM D YYYY');
 
             if (date in frequencies) {
@@ -46,15 +47,25 @@ lvlup
         var firstWeekDay = moment().year(year).month(monthString).date(1).weekday();
 
         for (var i = firstWeekDay; i > 0; i--) {
+            // start the month on a sunday
             var nextDay = moment().year(year).month(monthString).date(1 - i);
             completeMonth.push(nextDay);
         }
 
+        var lastDayNum;
         for (var i = 0; i <= 31; i++) {
             var nextDay = moment().year(year).month(monthString).date(1 + i);
             if (nextDay.month() !== moment().month(monthString).month()) {
+                lastDayNum = i;
                 break;
             }
+            completeMonth.push(nextDay);
+        }
+
+        var lastWeekDay = completeMonth[completeMonth.length - 1].weekday();
+        for (var i = lastWeekDay, count = 1; i < 6; i++, count++) {
+            // end the month on a saturday
+            var nextDay = moment().year(year).month(monthString).date(lastDayNum + count);
             completeMonth.push(nextDay);
         }
 

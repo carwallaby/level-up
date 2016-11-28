@@ -31,7 +31,9 @@ lvlup
             startTime: '='
         },
         link: function(scope, element, attr) {
-            scope.time = moment(scope.startTime);
+            // get rid of ISO timezone so time is parsed as naive
+            var naive = scope.startTime.split('+');
+            scope.time = moment(naive[0]);
             $interval(function() {
                 scope.time.add(1, 'seconds');
             }, 1000)

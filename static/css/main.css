@@ -355,10 +355,48 @@ select:disabled {
 .weekday {
     font-weight: 100;
     text-align: center;
-    display: inline-block;
+    width: 14%;
     font-size: 0.7em;
     color: #4fc3f7;
     text-transform: uppercase;
+}
+
+.calendar-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.calendar-box {
+    width: 14%;
+    border: 1px solid #bdbdbd;
+    margin-bottom: 0.15em;
+    height: 4em;
+    padding: 0.5em;
+}
+
+.calendar-box.today {
+    background-color: #e1f5fe;
+    color: #4fc3f7;
+    border-color: #4fc3f7;
+}
+
+.calendar-box.complete:not(.today) {
+    background-color: #c8e6c9;
+    border-color: #81c784;
+}
+
+.completion-num {
+    color: #81c784;
+    text-align: center;
+    border: 1px solid #81c784;
+    background-color: #f5f5f5;
+}
+
+.calendar-box.other-month {
+    background-color: #e0e0e0;
+    color: #9e9e9e;
+    opacity: 0.5;
 }
 
 @media screen and (min-width: 450px) {

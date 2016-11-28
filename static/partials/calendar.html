@@ -9,9 +9,9 @@
         <span>{{ day }}</span>
     </div>
 </div>
-<div>
-    <div ng-repeat="date in dates" ng-class="{today: isToday(date)}">
+<div class="calendar-container">
+    <div ng-repeat="date in dates" class="calendar-box" ng-class="{today: isToday(date), complete: frequencies[date.format('MMM D YYYY')], 'other-month': date.month() !== currentMonth}">
         <span>{{ date.format('DD') }}</span>
-        <span>Completions: {{ frequencies[date.format('MMM D YYYY')] }}</span>
+        <div ng-if="frequencies[date.format('MMM D YYYY')]" class="completion-num">{{ frequencies[date.format('MMM D YYYY')] }}</div>
     </div>
 </div>

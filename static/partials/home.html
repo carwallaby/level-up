@@ -1,8 +1,9 @@
 <p class="greeting">{{ currentUser.is_birthday ? 'Happy Birthday' : 'Hello' }}<span ng-if="currentUser.name">, {{ currentUser.name }}</span>!</p>
 <p class="greeting-sub">It is <lvl-clock start-time="currentUser.local_now"></lvl-clock> in {{ location }}.</p>
-<div ng-if="!habits.length">
-    <p><a ui-sref="new-habit">Add a new habit</a> to get started!</p>
-    <p><a ui-sref="account">Finish setting up your account</a> to personalize your experience.</p>
+<div ng-if="!habits.length" class="intro-links">
+    <p>Let's get started.</p>
+    <p><a ui-sref="new-habit">Add a New Habit</a></p>
+    <p ng-if="!currentUser.name || !currentUser.sms_num || !currentUser.birthdate"><a ui-sref="account">Personalize Your Account</a></p>
 </div>
 <div ng-if="habits.length" class="habit-container">
     <div ng-repeat="habit in getSortedHabits()" class="habit" ng-class="{complete: habit.done_today}">

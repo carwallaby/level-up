@@ -507,6 +507,17 @@ select:disabled {
     border-bottom-right-radius: 5px;
 }
 
+.intro-links {
+    margin-top: 2em;
+    text-align: center;
+    font-size: 1.25em;
+    font-weight: 100;
+}
+
+.intro-links p:first-child {
+    margin-bottom: 1em;
+}
+
 @media screen and (min-width: 450px) {
     .mobile-header-links {
         display: none;

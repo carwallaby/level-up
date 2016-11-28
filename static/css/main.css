@@ -14,7 +14,7 @@ body {
 a {
     text-decoration: none;
     color: #03a9f4;
-    transition: color 0.5s;
+    transition: color 0.2s;
 }
 
 a:hover {
@@ -137,8 +137,16 @@ a:hover {
     border-radius: 5px;
     padding: 5px 15px;
     background-color: #4fc3f7;
-    border: none;
+    border: 2px solid #4fc3f7;
     color: #fafafa;
+    transition: background-color 0.2s, color 0.2s;
+}
+
+.sm-button:hover {
+    border-color: #4fc3f7;
+    color: #4fc3f7;
+    background-color: #fafafa;
+    cursor: pointer;
 }
 
 .md-button {
@@ -328,10 +336,11 @@ select:disabled {
 
 .calendar-tabs a {
     display: inline-block;
-    padding: 5px;
+    padding: 5px 20px;
     border: 1px solid #4fc3f7;
     border-radius: 5px;
     font-size: 0.8em;
+    transition: background-color 0.2s, color 0.2s;
 }
 
 .calendar-tabs a.disabled {
@@ -339,9 +348,15 @@ select:disabled {
     border-color: #9e9e9e;
 }
 
+.calendar-tabs a:hover:not(.disabled) {
+    background-color: #4fc3f7;
+    color: #fafafa;
+    cursor: pointer;
+}
+
 .calendar-title {
     font-weight: 100;
-    font-size: 1.5em;
+    font-size: 1.25em;
     text-align: center;
     margin-top: 1em;
 }
@@ -375,6 +390,10 @@ select:disabled {
     padding: 0.5em;
 }
 
+.calendar-box span {
+    font-weight: 100;
+}
+
 .calendar-box.today {
     background-color: #e1f5fe;
     color: #4fc3f7;
@@ -400,6 +419,62 @@ select:disabled {
     opacity: 0.5;
 }
 
+.habit-info {
+    font-weight: 100;
+}
+
+.habit-info span {
+    font-weight: 500;
+    color: #4fc3f7;
+}
+
+.habit-info-main {
+    font-size: 1.5em;
+}
+
+.goal-box {
+    margin-top: 1em;
+}
+
+.goal-box .title {
+    font-weight: 500;
+}
+
+.habit-tabs {
+    text-align: center;
+    margin-top: 1em;
+}
+
+.habit-tabs a {
+    border: 1px solid #4fc3f7;
+    display: inline-block;
+    width: 125px;
+    padding: 5px;
+    transition: background-color 0.2s, color 0.2s;
+}
+
+.habit-tabs a:first-child {
+    border-right: none;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+}
+
+.habit-tabs a:hover:not(.active) {
+    background-color: #4fc3f7;
+    color: #fafafa;
+}
+
+.habit-tabs a.active {
+    border-color: #bdbdbd;
+    color: #bdbdbd;
+}
+
+.habit-tabs a:last-child {
+    border-left-color: #4fc3f7;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+
 @media screen and (min-width: 450px) {
     .mobile-header-links {
         display: none;
@@ -415,5 +490,11 @@ select:disabled {
 
     .habit-label {
         display: inline-block;
+    }
+}
+
+@media screen and (min-width: 1000px) {
+    body {
+        font-size: 1em;
     }
 }

@@ -142,7 +142,7 @@ a:hover {
     transition: background-color 0.2s, color 0.2s;
 }
 
-.sm-button:hover {
+.sm-button:hover:not(:disabled) {
     border-color: #4fc3f7;
     color: #4fc3f7;
     background-color: #fafafa;
@@ -454,7 +454,8 @@ select:disabled {
     font-weight: 100;
 }
 
-.habit-info span {
+.habit-info span,
+.pop {
     font-weight: 500;
     color: #4fc3f7;
 }

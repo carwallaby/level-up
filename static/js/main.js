@@ -49,8 +49,19 @@ lvlup
     };
 })
 
-.controller('AccountController', function($scope, currentUser) {
+.controller('AccountController', function($scope, currentUser, $http, $state) {
     $scope.currentUser = currentUser;
+
+    $scope.nameFormShown = false;
+    $scope.toggleNameForm = function() {
+        $scope.nameFormShown = !$scope.nameFormShown;
+    };
+    $scope.updateName = function(name) {
+        var reqUrl = '/api/update-name';
+        $http.post(reqUrl, {name: name}).then(function(res) {
+            $state.reload();
+        });
+    };
 })
 
 .controller('HabitViewController', function($scope, currentUser, habitInfo, $state, $http) {
@@ -79,5 +90,4 @@ lvlup
 
 .controller('EditHabitController', function($scope, habit) {
     $scope.habit = habit;
-    console.log($scope.habit);
 });

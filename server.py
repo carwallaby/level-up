@@ -212,6 +212,14 @@ def delete_habit():
     return jsonify('success')
 
 
+@app.route('/api/update-name', methods=['POST'])
+@login_required
+def update_name():
+    current_user.name = request.json['name']
+    db.session.commit()
+    return jsonify('success')
+
+
 # -------------------- server --------------------
 
 if __name__ == '__main__':

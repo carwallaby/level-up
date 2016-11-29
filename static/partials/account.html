@@ -2,7 +2,7 @@
 <div class="account-details-container">
     <div class="account-field" id="account-name">
         <form ng-show="!currentUser.name || nameFormShown" ng-submit="updateName(name)" novalidate>
-            <label for="name">Name:</label>
+            <label for="name" class="form-span">Name:</label>
             <input type="text" name="name" id="name" ng-model="name" class="text-input" ng-value="currentUser.name" required>
             <input type="submit" value="Save" ng-disabled="!name" class="tiny-button">
             <button type="button" ng-click="toggleNameForm()" ng-hide="!currentUser.name" class="tiny-button grey-btn">Cancel</button>
@@ -11,7 +11,7 @@
     </div>
     <div class="account-field" id="account-sms">
         <form ng-show="!currentUser.sms_num || smsFormShown" ng-submit="updateSms(sms)" novalidate>
-            <label for="sms">SMS Number:</label>
+            <label for="sms" class="form-span">SMS Number:</label>
             <input type="text" name="sms" id="sms" ng-model="sms" class="text-input" ng-value="currentUser.sms_num.slice(2)" maxlength="14" ng-pattern="/^(\([0-9]{3}\)|[0-9]{3})(\s|-)?[0-9]{3}(\s|-)?[0-9]{4}$/" required>
             <input type="submit" value="Save" ng-disabled="!sms" class="tiny-button">
             <button type="button" ng-click="deleteSms()" ng-hide="!currentUser.sms_num" class="tiny-button red-btn">Delete</button>
@@ -22,7 +22,7 @@
     </div>
     <div class="account-field" id="account-reminders">
         <form ng-show="currentUser.sms_num && remindersFormShown" ng-submit="updateReminders(reminders)" novalidate>
-            <span>Reminders:</span>
+            <span class="form-span">Reminders:</span>
             <input type="radio" name="reminders" ng-model="reminders" id="none" value="none" ng-checked="!currentUser.reminders"><label for="none">Off</label>
             <input type="radio" name="reminders" ng-model="reminders" id="daily" value="daily" ng-checked="currentUser.reminders === 'daily'"><label for="daily">Daily</label>
             <input type="radio" name="reminders" ng-model="reminders" id="weekly" value="weekly" ng-checked="currentUser.reminders === 'weekly'"><label for="weekly">Weekly</label>

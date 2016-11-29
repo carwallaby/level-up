@@ -51,7 +51,6 @@ lvlup
 
 .controller('AccountController', function($scope, currentUser, $http, $state) {
     $scope.currentUser = currentUser;
-    console.log($scope.currentUser);
 
     $scope.nameFormShown = false;
     $scope.toggleNameForm = function() {

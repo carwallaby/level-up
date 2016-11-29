@@ -27,10 +27,18 @@ lvlup
             labels: labels,
             datasets: [{
                 label: 'Completions',
-                data: points
+                data: points,
+                fill: false,
+                borderColor: '#4fc3f7',
+                borderWidth: 1
             }]
         };
-        var options = {};
+
+        var options = {
+            legend: {
+                display: false
+            }
+        };
 
         var trendChart = new Chart(chart, {
             type: 'line',

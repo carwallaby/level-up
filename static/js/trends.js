@@ -37,6 +37,14 @@ lvlup
         var options = {
             legend: {
                 display: false
+            },
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        min: 0,
+                        stepSize: 1
+                    }
+                }]
             }
         };
 
